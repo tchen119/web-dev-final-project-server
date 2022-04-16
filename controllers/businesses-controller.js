@@ -6,12 +6,6 @@ const addLike = async (req, res) => {
   res.json(insertedLike);
 }
 
-const findAllLikes = async (req, res) => {
-  const business_id = req.params.business_id;
-  const likes = await businessesDao.findAllLikes(business_id);
-  res.json(likes);
-}
-
 const findLike = async (req, res) => {
   const user_id = req.params.user_id;
   const business_id = req.params.business_id;
@@ -21,13 +15,13 @@ const findLike = async (req, res) => {
 
 const findLikes = async (req, res) => {
   const business_id = req.params.business_id;
-  const response = await businessesDao.findLikes(business_id);
+  const response = await businessesDao.findLikesByBusiness(business_id);
   res.json(response);
 }
 
 const findDislikes = async (req, res) => {
   const business_id = req.params.business_id;
-  const response = await businessesDao.findDislikes(business_id);
+  const response = await businessesDao.findDislikesByBusiness(business_id);
   res.json(response);
 }
 
@@ -54,15 +48,9 @@ const addReview = async (req, res) => {
 
 const findAllReviews = async (req, res) => {
   const business_id = req.params.business_id;
-  const reviews = await businessesDao.findAllReviews(business_id);
+  const reviews = await businessesDao.findAllReviewsByBusiness(business_id);
   res.json(reviews);
 }
-
-//const findReview = async (req, res) => {
-//  const id = req.params.id;
-//  const review = await businessesDao.findReview(id);
-//  res.json(review);
-//}
 
 const removeReview = async (req, res) => {
   const id = req.params.id;
@@ -79,16 +67,14 @@ const updateReview = async (req, res) => {
 
 export default (app) => {
   app.post('/api/businesses/likes', addLike);
-  app.get('/api/businesses/likes/:business_id', findAllLikes);
   app.get('/api/businesses/likes/:user_id/:business_id', findLike);
   app.get('/api/businesses/likes/:business_id', findLikes);
-  app.get('/api/businesses/likes/dislikes/:business_id', findDislikes);
+  app.get('/api/businesses/dislikes/:business_id', findDislikes);
   app.delete('/api/businesses/likes/:user_id/:business_id', removeLike);
   app.put('/api/businesses/likes/:user_id/:business_id', updateLike);
 
   app.post('/api/businesses/reviews', addReview);
   app.get('/api/businesses/reviews/:business_id', findAllReviews);
-  //app.get('/api/businesses/reviews/:id', findReview);
   app.delete('/api/businesses/reviews/:id', removeReview);
   app.put('/api/businesses/reviews/:id', updateReview);
 }

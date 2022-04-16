@@ -9,13 +9,13 @@ export const removeLike = (user_id, business_id) =>
 export const findLike = (user_id, business_id) =>
   likesModel.find({user_id: user_id, business_id: business_id});
 
-export const findAllLikes = (business_id) =>
-  likesModel.find({business_id: business_id});
+export const findAllLikesByUser = (user_id) =>
+  likesModel.find({user_id: user_id});
 
-export const findLikes = (business_id) =>
+export const findLikesByBusiness = (business_id) =>
   likesModel.find({like: true, business_id: business_id});
 
-export const findDislikes = (business_id) =>
+export const findDislikesByBusiness = (business_id) =>
   likesModel.find({like: false, business_id: business_id});
 
 export const updateLike = (user_id, business_id, like) =>
@@ -23,9 +23,9 @@ export const updateLike = (user_id, business_id, like) =>
 
 export const addReview = (review) => reviewsModel.create(review);
 
-export const findReview = (id) => reviewsModel.find({_id: id});
+export const findAllReviewsByBusiness = (business_id) => reviewsModel.find({"business_id": business_id});
 
-export const findAllReviews = (business_id) => reviewsModel.find({"business_id": business_id});
+export const findAllReviewsByUser = (user_id) => reviewsModel.find({"user_id": user_id});
 
 export const updateReview = (id, review) => reviewsModel.updateOne({_id: id}, {$set: review});
 
