@@ -7,7 +7,8 @@ const addLike = async (req, res) => {
 }
 
 const findAllLikes = async (req, res) => {
-  const likes = await businessesDao.findAllLikes();
+  const business_id = req.params.business_id;
+  const likes = await businessesDao.findAllLikes(business_id);
   res.json(likes);
 }
 
@@ -16,6 +17,18 @@ const findLike = async (req, res) => {
   const business_id = req.params.business_id;
   const like = await businessesDao.findLike(user_id, business_id);
   res.json(like);
+}
+
+const findLikes = async (req, res) => {
+  const business_id = req.params.business_id;
+  const response = await businessesDao.findLikes(business_id);
+  res.json(response);
+}
+
+const findDislikes = async (req, res) => {
+  const business_id = req.params.business_id;
+  const response = await businessesDao.findDislikes(business_id);
+  res.json(response);
 }
 
 const removeLike = async (req, res) => {
@@ -66,8 +79,10 @@ const updateReview = async (req, res) => {
 
 export default (app) => {
   app.post('/api/businesses/likes', addLike);
-  app.get('/api/businesses/likes', findAllLikes);
+  app.get('/api/businesses/likes/:business_id', findAllLikes);
   app.get('/api/businesses/likes/:user_id/:business_id', findLike);
+  app.get('/api/businesses/likes/:business_id', findLikes);
+  app.get('/api/businesses/likes/dislikes/:business_id', findDislikes);
   app.delete('/api/businesses/likes/:user_id/:business_id', removeLike);
   app.put('/api/businesses/likes/:user_id/:business_id', updateLike);
 
