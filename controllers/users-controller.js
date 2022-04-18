@@ -1,21 +1,19 @@
+import * as usersDao from "../databases/users/users-dao.js";
+
 const signup = async (req, res) => {
-//  const user = req.body;
-//  const existingUser = await usersDao.findUserByEmail(user.email);
-//  if (existingUser) {
-//    res.sendStatus(403);
-//  } else {
-//    const newUser = await usersDao.createUser(user);
-//    res.json(newUser);
-//  }
+  const user = req.body;
+  // prevent same email from being used twice
+  const newUser = usersDao.createUser(user);
+  res.json(newUser);
 }
 
 const signin = async (req, res) => {
-//  const existingUser = await userDao.findByCredentials(req.body.email, req.body.password);
-//  if (existingUser) {
-//    req.session['currentUser'] = existingUser;
-//  } else {
-//    res.sendStatus(503);
-//  }
+  const existingUser = await usersDao.findByCredentials(req.body.email, req.body.password);
+  if (existingUser) {
+    req.session['currentUser'] = existingUser;
+  } else {
+    res.sendStatus(503);
+  }
 }
 
 const signout = () => {
@@ -30,7 +28,14 @@ const profile = (req, res) => {
 //  }
 }
 
+
+const users = async (req, res) => {
+  const allUsers = await usersDao.findAllUsers();
+  res.json(allUsers);
+}
+
 export default (app) => {
+  app.get('/users', users);
   app.post('/api/signup', signup);
   app.post('/api/signin', signin);
   app.post('/api/signout', signout);
