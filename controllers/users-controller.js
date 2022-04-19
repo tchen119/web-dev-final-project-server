@@ -7,6 +7,8 @@ const signup = async (req, res) => {
     res.sendStatus(403);
   } else {
     const newUser = await usersDao.createUser(user);
+    const newUserObj = await usersDao.findByCredentials(user.email, user.password);
+    req.session['currentUser'] = newUserObj;
     res.json(newUser);
   }
 }
