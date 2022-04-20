@@ -43,7 +43,8 @@ const users = async (req, res) => {
 }
 
 const getUserById = async (req, res) => {
-  const user_id = req.params.user_id;
+  const user_id = req.params.id;
+  Object(user_id);
   const user = await usersDao.findUserById(user_id);
   res.json(user);
 }
