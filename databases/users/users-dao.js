@@ -1,5 +1,7 @@
 import usersModel from "./users-model.js";
 
+export const updateUserFavorites = async (email, user) => usersModel.updateOne({email: email}, {$set: user});
+
 export const findAllUsers = async () => usersModel.find();
 
 export const findUserByEmail = (email) => usersModel.find({email: email});

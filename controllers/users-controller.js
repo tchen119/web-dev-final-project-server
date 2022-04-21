@@ -25,7 +25,7 @@ const signin = async (req, res) => {
 
 const profile = (req, res) => {
   const currentUser = req.session['currentUser'];
-  if (currentUser) {
+  if (currentUser.length > 0) {
     res.json(currentUser);
   } else {
     res.sendStatus(503);
@@ -49,6 +49,19 @@ const getUserById = async (req, res) => {
   res.json(user);
 }
 
+const favorite = async (req, res) => {
+  const fave = req.body.bid;
+  const currentUser = req.session['currentUser'][0];
+  if (currentUser.favorites) {
+    currentUser.favorites = [...currentUser.favorites, fave];
+  } else {
+    currentUser.favorites = [];
+    currentUser.favorites = [...currentUser.favorites, fave];
+  }
+  await usersDao.updateUserFavorites(currentUser.email, currentUser);
+  res.sendStatus(200);
+}
+
 export default (app) => {
   app.post('/api/signup', signup);
   app.post('/api/signin', signin);
@@ -57,4 +70,5 @@ export default (app) => {
 
   app.get('/api/users', users);
   app.get('/api/users/:id', getUserById);
+  app.put('/api/favorite', favorite);
 }
