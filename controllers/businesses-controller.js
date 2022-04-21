@@ -52,6 +52,11 @@ const findAllReviews = async (req, res) => {
   res.json(reviews);
 }
 
+const findRecentReviews = async (req, res) => {
+  const reviews = await businessesDao.findAllReviews();
+  res.json(reviews);
+}
+
 const removeReview = async (req, res) => {
   const id = req.params.id;
   const status = await businessesDao.removeReview(id);
@@ -75,6 +80,7 @@ export default (app) => {
 
   app.post('/api/businesses/reviews', addReview);
   app.get('/api/businesses/reviews/:business_id', findAllReviews);
+  app.get('/api/businesses/reviews/', findRecentReviews);
   app.delete('/api/businesses/reviews/:id', removeReview);
   app.put('/api/businesses/reviews/:id', updateReview);
 }

@@ -25,6 +25,8 @@ export const addReview = (review) => reviewsModel.create(review);
 
 export const findAllReviewsByBusiness = (business_id) => reviewsModel.find({"business_id": business_id});
 
+export const findAllReviews = async () => reviewsModel.find();
+
 export const findAllReviewsByUser = (user_id) => reviewsModel.find({"user_id": user_id});
 
 export const updateReview = (id, review) => reviewsModel.updateOne({_id: id}, {$set: review});
