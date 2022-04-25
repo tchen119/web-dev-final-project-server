@@ -83,8 +83,14 @@ const findReviewsByUser = async (req, res) => {
   res.json(reviews);
 }
 
+const findAllLikes = async (req, res) => {
+  const likes = await businessesDao.findAllLikes();
+  res.json(likes);
+}
+
 export default (app) => {
   app.post('/api/businesses/likes', addLike);
+  app.get('/api/businesses/likes', findAllLikes);
   app.get('/api/businesses/likes/:user_id/:business_id', findLike);
   app.get('/api/businesses/likes/:business_id', findLikes);
   app.get('/api/businesses/dislikes/:business_id', findDislikes);
