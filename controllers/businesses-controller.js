@@ -52,6 +52,13 @@ const findAllReviews = async (req, res) => {
   res.json(reviews);
 }
 
+const findAllReviewsByIdAndName = async (req, res) => {
+  const business_id = req.params.business_id;
+  const business_name = req.params.business_name;
+  const reviews = await businessesDao.findAllReviewsByBusinessIdName(business_id, business_name);
+  res.json(reviews);
+}
+
 const findRecentReviews = async (req, res) => {
   const reviews = await businessesDao.findAllReviews();
   res.json(reviews);
@@ -70,6 +77,12 @@ const updateReview = async (req, res) => {
   res.send(status);
 }
 
+const findReviewsByUser = async (req, res) => {
+  const id = req.params.user_id;
+  const reviews = await businessesDao.findAllReviewsByUser(id);
+  res.json(reviews);
+}
+
 export default (app) => {
   app.post('/api/businesses/likes', addLike);
   app.get('/api/businesses/likes/:user_id/:business_id', findLike);
@@ -80,7 +93,9 @@ export default (app) => {
 
   app.post('/api/businesses/reviews', addReview);
   app.get('/api/businesses/reviews/:business_id', findAllReviews);
+  app.get('/api/businesses/reviews/:business_id/:business_name', findAllReviewsByIdAndName);
   app.get('/api/businesses/reviews/', findRecentReviews);
   app.delete('/api/businesses/reviews/:id', removeReview);
   app.put('/api/businesses/reviews/:id', updateReview);
+  app.get('/api/reviews/:user_id', findReviewsByUser);
 }

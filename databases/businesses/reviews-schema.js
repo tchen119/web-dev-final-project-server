@@ -5,6 +5,7 @@ const business_reviews_schema = mongoose.Schema({
   first_name: String,
   last_name: String,
   business_id: String,
+  business_name: String,
   review: String
 }, {collection: 'business_reviews'});
 

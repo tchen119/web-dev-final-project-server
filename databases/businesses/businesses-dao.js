@@ -25,6 +25,8 @@ export const addReview = (review) => reviewsModel.create(review);
 
 export const findAllReviewsByBusiness = (business_id) => reviewsModel.find({"business_id": business_id});
 
+export const findAllReviewsByBusinessIdName = (business_id, business_name) => reviewsModel.find({"business_id": business_id, "business_name": business_name});
+
 export const findAllReviews = async () => reviewsModel.find();
 
 export const findAllReviewsByUser = (user_id) => reviewsModel.find({"user_id": user_id});

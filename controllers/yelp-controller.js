@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const auth = 'Bearer xOqSW56Ftl86T5PaVs1kUrOjpfY0PK3pk2VzIdqvyfw8C5U9KLTmplArF2xfcoVbkMJnsIv1ZTSpl6g2EiLK_Tr9xy76f-afL54YGqS7aCR_M6_QH9-NhFtx819TYnYx';
+const auth = 'Bearer qmTEtLDkR8T2bw0tJHWjkD-_kZpu39-28jVvi2AlW8_P4MEr5a4i82vewQay7X_sLRTvGFZbODg1-aIok43o-AbOATtg07702ljJP-Pnw_xNfUykVHLWai3lbVdhYnYx';
 
 const getBusinessesByTermAndLocation = async (req, res) => {
   const YELP_URL = 'https://api.yelp.com/v3/businesses/search';
