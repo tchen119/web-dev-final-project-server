@@ -5,6 +5,7 @@ import session from 'express-session';
 import yelpController from './controllers/yelp-controller.js';
 import businessesController from './controllers/businesses-controller.js';
 import usersController from './controllers/users-controller.js';
+import adminController from './controllers/admin-controller.js';
 
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017/final_project';
 mongoose.connect(CONNECTION_STRING);
@@ -31,5 +32,6 @@ app.use(session(sess));
 yelpController(app);
 businessesController(app);
 usersController(app);
+adminController(app);
 
 app.listen(process.env.PORT || 4000);
