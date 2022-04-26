@@ -73,6 +73,19 @@ const removeFavorite = async (req, res) => {
   res.sendStatus(200);
 }
 
+const update = async (req, res) => {
+  const user = req.body;
+  const existingUser = await usersDao.findUserByEmail(user.email);
+  if (existingUser.length <= 0) {
+    res.sendStatus(403);
+  } else {
+    const updateUser = await usersDao.updateUser(user.email, user);
+    const userObj = await usersDao.findByCredentials(user.email, user.password);
+    req.session['currentUser'] = userObj;
+    res.json(updateUser);
+  }
+}
+
 export default (app) => {
   app.post('/api/signup', signup);
   app.post('/api/signin', signin);
@@ -83,5 +96,6 @@ export default (app) => {
   app.get('/api/users/:id', getUserById);
 
   app.put('/api/favorite', favorite);
+  app.put('/api/updateprofile', update);
   app.delete('/api/favorite/:bid', removeFavorite);
 }

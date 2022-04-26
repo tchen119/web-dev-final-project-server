@@ -11,3 +11,5 @@ export const findUserById = (id) => usersModel.find({_id: id});
 export const findByCredentials = async (email, password) => usersModel.find({email: email, password: password});
 
 export const createUser = async (user) => usersModel.create(user);
+
+export const updateUser = async (email, user) => usersModel.updateOne({email: email}, {$set: user});
