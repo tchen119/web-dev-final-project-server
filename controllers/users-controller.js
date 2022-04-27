@@ -97,6 +97,5 @@ export default (app) => {
 
   app.put('/api/favorite', favorite);
   app.put('/api/updateprofile', update);
-
   app.delete('/api/favorite/:bid', removeFavorite);
 }
