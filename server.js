@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   credentials: true,
-  origin: 'http://localhost:3000' //'https://genuine-lily-26cdb4.netlify.app'
+  origin: 'https://genuine-lily-26cdb4.netlify.app'
 }));
 
 const sess = {
