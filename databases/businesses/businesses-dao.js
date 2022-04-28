@@ -12,7 +12,7 @@ export const findLike = (user_id, business_id) =>
 export const findAllLikesByUser = (user_id) =>
   likesModel.find({user_id: user_id});
 
-export const findAllLikes = () => likesModel.find();
+export const findAllLikes = () => likesModel.find({like: true});
 
 export const findLikesByBusiness = (business_id) =>
   likesModel.find({like: true, business_id: business_id});
