@@ -17,7 +17,6 @@ const signin = async (req, res) => {
   const existingUser = await usersDao.findByCredentials(req.body.email, req.body.password);
   if (existingUser.length > 0) {
     req.session['currentUser'] = existingUser;
-    console.log(req);
     res.json(existingUser);
   } else {
     res.sendStatus(503);
