@@ -24,6 +24,7 @@ const signin = async (req, res) => {
 }
 
 const profile = (req, res) => {
+  console.log(req.session);
   const currentUser = req.session['currentUser'];
   if (currentUser && currentUser.length > 0) {
     res.json(currentUser);
