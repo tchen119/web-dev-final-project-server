@@ -19,14 +19,12 @@ app.use(cors({
 
 const sess = {
   secret: 'super secret password', //process.env.sess_secret
-  cookie: {
-    httpOnly: false
-  }
+  cookie: { }
 }
 
 if (process.env.ENV === 'production') {
   app.set('trust proxy', 1);
-  sess.cookie.secure = true;
+  //sess.cookie.secure = false;
 }
 
 app.use(session(sess));
